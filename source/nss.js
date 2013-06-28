@@ -5,6 +5,7 @@
             e.preventDefault();
             var thisindx = elems.index(this);
             console.log(thisindx);
+            console.log(elems.length);
         });
     };
 }( jQuery ))
