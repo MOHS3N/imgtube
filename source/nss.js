@@ -4,6 +4,9 @@
        $('body').append('<div class="shower"></div>');
        $('div.shower').append('<div class="screen"></div>');
        $('div.screen').append('<div class="tube"></div>');
+       $('div.screen').append('<div class="closebtn"></div>');
+       $('div.screen').append('<div class="backbtn"></div>');
+       $('div.screen').append('<div class="forwardbtn"></div>');
        for(var num=0;num<len;num++){
        	$('div.tube').append('<img src="' + tag.eq(num).attr('href')+'" width="950" height="600"/>');
        };
@@ -25,6 +28,7 @@
     $.fn.nss = function( ) {
     	
         var elems = this;
+
         return elems.on('click', function(e) {
             e.preventDefault();
             var thisindx = elems.index(this);
@@ -34,5 +38,7 @@
             appendtag(elems,elemslen,thisindx);
         });
 
+
+        return this;
     };
 }( jQuery ))

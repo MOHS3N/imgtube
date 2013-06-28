@@ -31,3 +31,31 @@ div.shower > div.screen > div.tube{
 div.shower > div.screen > div.tube > img{
 	position: absolute;
 }
+div.closebtn{
+	background-image:url('img/bfc.png');
+	width: 44px;
+	height: 37px;
+	position: absolute;
+	right: -5px;
+	top: -16px;
+	z-index: 10;
+	cursor:pointer;
+}
+div.backbtn,div.forwardbtn{
+	width: 44px;
+	height: 37px;
+	position: absolute;
+	top: 250px;
+	background-image:url('img/bfc.png');
+	z-index: 16;
+	
+}
+div.backbtn{
+	left:40px;
+	background-position: 0px -35px;
+	
+}
+div.forwardbtn{
+	right:40px;
+	background-position: 0px -70px;
+}
