@@ -39,17 +39,21 @@
 		$('div.shower').stop().animate({
 			'opacity':'1'
 		},500)
+    //Close btn clicked.
+		$('div.closebtn').on('click',function(){
+      $('div.shower').stop().animate({
+        'opacity':'0'
+      },500,'linear',function(){
 
-		$('div.closebtn').click(function(){
-			// hide and Stop plugin By Animate
-			$('div.shower').stop().animate({
-				'opacity':'0'
-			},500,'linear',function(){
-				$('div.shower').css({'display':'none'});
-			})
+        $('div.tube > img').removeAttr('class');
+        $('div.tube > img').removeAttr('style');
 
-		});
-     };
+        $('div.shower').css({'display':'none'});
+      });
+    });
+    
+    
+   };
 
     $.fn.nss = function( ) {
     	//start plugin :)
