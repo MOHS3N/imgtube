@@ -20,20 +20,7 @@
      // len = this.length.
      function setslide(index,len){
      	// this for is add class img tag befor $(this).index() And set style.
-     	for(var i=0; i<index;i++){
-			$('div.tube > img').eq(i).attr('class','leftout');
-			$('div.tube > img').eq(i).attr('style','left : -960px;')
-		};
-		// this for is add class img tag after $(this).index() and set style.
-		for(var j=index+1;j<len;j++){
-			$('div.tube > img').eq(j).attr('class','rightout');
-			$('div.tube > img').eq(j).attr('style','right : -960px;')
-			
-		};
-		// this code is add class active for selected img (this), and set Style.
-		$('div.tube > img').eq(index).attr('class','active');
-		$('div.tube > img').eq(index).attr('style','left : 0px; right : 0px;');
-
+     	ref(index,len);
 		// start base animate of this plugin
 		$('div.shower').css({'display':'block'});
 		$('div.shower').stop().animate({
@@ -44,16 +31,91 @@
       $('div.shower').stop().animate({
         'opacity':'0'
       },500,'linear',function(){
-
+        // remove attr(class & style)
         $('div.tube > img').removeAttr('class');
         $('div.tube > img').removeAttr('style');
 
         $('div.shower').css({'display':'none'});
       });
     });
+      // forward btn clicked.
+    $('div.forwardbtn').on('click',function(){
+      // It was the last picture.
+      // View first photo back to animation.
+      if(index==len-1){
+        $('div.tube > img').eq(0).attr('class','rightout');
+        $('div.tube > img').eq(0).attr('style','right : -960px');
+        $('div.tube > img').eq(0).css({
+          'z-index':'1'
+        });
+       $('div.tube > img').eq(0).animate({
+        'right':'0px'
+       },400,'linear',function(){
+        $('div.tube > img').eq(0).attr('class','active');
+        index=0;
+        ref(index,len);
+       })
+       // If the last picture was not
+      }else{
+
+
+      index++;
+
+      $('div.tube > img').eq(index).stop().animate({
+        'right':'0px'
+      },400,'linear',function(){
+        ref(index,len);
+      });
+      }
+    });
+    // backbtn clicked.
+    $('div.backbtn').on('click',function(){
+      //It was the frist picture.
+     if(index<=0){
+     // $('div.tube > img').attr('style','z-index : 0');
+      $('div.tube > img').eq(len-1).attr('class','leftout');
+      $('div.tube > img').eq(len-1).attr('style','left : -960px');
+      $('div.tube > img').eq(len-1).css({'z-index':'1'});
+      $('div.tube > img').eq(len-1).stop().animate({
+          'left':'0px'
+      },400,'linear',function(){
+        $('div.tube > img').eq(len-1).attr('class','active');
+        index=len-1;
+        ref(index,len);
+      });
+     }else{
+
+      index--;
+
+      $('div.tube >img').eq(index).css({
+      'z-index':'15'
+    })
+      $('div.tube > img').eq(index).stop().animate({
+        'left':'0px'
+      },400,'linear',function(){
+        ref(index,len);
+      })
+
+     }
+    })
     
-    
+    //----------//
    };
+   //------------//
+   function ref(action,total){
+    for(var lastaction=0;lastaction<action;lastaction++){
+      $('div.tube > img').eq(lastaction).attr('class','leftout');
+      $('div.tube > img').eq(lastaction).attr('style','left : -960px;')
+    };
+    for(var nextaction=action+1;nextaction<total;nextaction++){
+      $('div.tube > img').eq(nextaction).attr('class','rightout');
+      $('div.tube > img').eq(nextaction).attr('style','right : -960px;')
+    };
+    $('div.tube > img').eq(action).attr('class','active');
+    $('div.tube > img').eq(action).attr('style','left : 0px; right : 0px;');
+  };
+   
+   
 
     $.fn.nss = function( ) {
     	//start plugin :)
